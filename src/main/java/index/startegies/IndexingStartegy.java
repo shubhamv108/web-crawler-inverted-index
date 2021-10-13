@@ -3,14 +3,13 @@ package index.startegies;
 import index.Document;
 import index.InvertedIndex;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class HtmlIndexingStartegy {
+public class IndexingStartegy {
 
     private final InvertedIndex index;
 
-    public HtmlIndexingStartegy(InvertedIndex index) {
+    public IndexingStartegy(InvertedIndex index) {
         this.index = index;
     }
 

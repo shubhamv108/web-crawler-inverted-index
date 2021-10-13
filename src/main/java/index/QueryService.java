@@ -16,6 +16,7 @@ public class QueryService {
     }
 
     public List<String> query(String query) {
+        query = query.toLowerCase();
         String[] words = query.split("\\s");
         List<IndexReposne> responses = null;
         for (String word : words) {

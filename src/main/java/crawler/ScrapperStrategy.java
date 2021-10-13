@@ -20,11 +20,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ScrapperStrategy {
-
-    private static final String URL_PATTERN = "(https|http)://[a-zA-Z0-9\\./~!@#$%&*()\\-_+={}:;|\\[\\]'<>\\?/]*";
 
     public List<String> getURLs(String url, String content) {
         WebClient webClient = new WebClient();
@@ -56,12 +55,12 @@ public class ScrapperStrategy {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        result.add(document.title());
+        result.add(document.title().toLowerCase());
         Elements hTags = document.select("h1, h2, h3, h4, h5, h6");
-        hTags.stream().forEach(hTag -> result.add(hTag.text()));
+        hTags.stream().forEach(hTag -> result.add(hTag.text().toLowerCase()));
         Elements paragraphs = document.select("p");
         for(Element p : paragraphs)
-            result.add(p.text());
+            result.add(p.text().toLowerCase());
         return result;
     }
 

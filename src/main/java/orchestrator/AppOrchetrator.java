@@ -1,13 +1,13 @@
 package orchestrator;
 
-import crawler.ScrapperStrategy;
 import crawler.CrawlingWorker;
+import crawler.ScrapperStrategy;
 import crawler.URLQueue;
 import index.DocumentStore;
 import index.InvertedIndex;
 import index.QueryService;
 import index.startegies.DocumentAnalyzingStartegy;
-import index.startegies.HtmlIndexingStartegy;
+import index.startegies.IndexingStartegy;
 import readers.ConsoleReader;
 import readers.InputReader;
 
@@ -31,7 +31,7 @@ public class AppOrchetrator {
         URLQueue urlQueue = new URLQueue();
         DocumentAnalyzingStartegy documentAnalyzingStartegy = new DocumentAnalyzingStartegy(
                 new ScrapperStrategy(),
-                new HtmlIndexingStartegy(index),
+                new IndexingStartegy(index),
                 urlQueue,
                 1);
         DocumentStore documentStore = new DocumentStore(documentAnalyzingStartegy);
