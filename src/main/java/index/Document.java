@@ -10,7 +10,6 @@ public class Document {
     final String url;
     final String content;
     final int depth;
-    boolean isProcessed;
     final DocumentAnalyzingStartegy documentAnalyzingStartegy;
 
     public Document(int id, String url, String content, int depth,
@@ -33,10 +32,6 @@ public class Document {
 
     public String getContent() {
         return content;
-    }
-
-    public boolean isProcessed() {
-        return isProcessed;
     }
 
     public int getDepth() {

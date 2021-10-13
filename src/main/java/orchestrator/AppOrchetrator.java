@@ -1,13 +1,13 @@
 package orchestrator;
 
 import crawler.ScrapperStrategy;
-import crawler.URLFetcher;
+import crawler.CrawlingWorker;
 import crawler.URLQueue;
 import index.DocumentStore;
 import index.InvertedIndex;
 import index.QueryService;
 import index.startegies.DocumentAnalyzingStartegy;
-import index.startegies.IndexingStartegy;
+import index.startegies.HtmlIndexingStartegy;
 import readers.ConsoleReader;
 import readers.InputReader;
 
@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 public class AppOrchetrator {
 
     private final InputReader reader;
-    private final URLFetcher fetcher;
+    private final CrawlingWorker fetcher;
     private final QueryService queryService;
 
     private final int workerPoolSize = 20;
@@ -31,11 +31,11 @@ public class AppOrchetrator {
         URLQueue urlQueue = new URLQueue();
         DocumentAnalyzingStartegy documentAnalyzingStartegy = new DocumentAnalyzingStartegy(
                 new ScrapperStrategy(),
-                new IndexingStartegy(index),
+                new HtmlIndexingStartegy(index),
                 urlQueue,
-                0);
+                1);
         DocumentStore documentStore = new DocumentStore(documentAnalyzingStartegy);
-        this.fetcher = new URLFetcher(urlQueue, documentStore);
+        this.fetcher = new CrawlingWorker(urlQueue, documentStore);
         for (String seedUrl : seedUrls)
             urlQueue.add(seedUrl, 0);
         for (int i = 0; i < workerPoolSize; i++)

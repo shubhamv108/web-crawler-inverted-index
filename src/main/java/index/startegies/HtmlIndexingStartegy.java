@@ -4,19 +4,19 @@ import index.Document;
 import index.InvertedIndex;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class IndexingStartegy {
+public class HtmlIndexingStartegy {
 
     private final InvertedIndex index;
 
-    public IndexingStartegy(InvertedIndex index) {
+    public HtmlIndexingStartegy(InvertedIndex index) {
         this.index = index;
     }
 
-    public void apply(Document document) {
-        String[] lines = document.getContent().split("\\n");
-        for (int i = 0; i < lines.length; i++) {
-            String[] words = lines[i].split("\\s");
+    public void apply(List<String> lines, Document document) {
+        for (int i = 0; i < lines.size(); i++) {
+            String[] words = lines.get(i).split("\\s");
             for (int j = 0; j < words.length; j++) {
                 this.index.add(words[j], document.getId(), i, j);
             }

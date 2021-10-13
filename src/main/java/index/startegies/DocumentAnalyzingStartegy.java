@@ -7,11 +7,11 @@ import index.Document;
 public class DocumentAnalyzingStartegy {
 
     final ScrapperStrategy scrapperStrategy;
-    final IndexingStartegy indexingStartegy;
+    final HtmlIndexingStartegy indexingStartegy;
     final URLQueue urlQueue;
     final int maxDepth;
 
-    public DocumentAnalyzingStartegy(ScrapperStrategy scrapperStrategy, IndexingStartegy indexingStartegy, URLQueue urlQueue, int maxDepth) {
+    public DocumentAnalyzingStartegy(ScrapperStrategy scrapperStrategy, HtmlIndexingStartegy indexingStartegy, URLQueue urlQueue, int maxDepth) {
         this.scrapperStrategy = scrapperStrategy;
         this.indexingStartegy = indexingStartegy;
         this.urlQueue = urlQueue;
@@ -24,12 +24,14 @@ public class DocumentAnalyzingStartegy {
     }
 
     private void index(Document document) {
-        this.indexingStartegy.apply(document);
+        this.indexingStartegy.apply(
+                this.scrapperStrategy.scrap(document.getUrl(), document.getContent()),
+                document);
     }
 
     private void depthSearch(Document document) {
         if (document.getDepth() < maxDepth) {
-            this.scrapperStrategy.getURLs(document.getContent())
+            this.scrapperStrategy.getURLs(document.getUrl(), document.getContent())
                     .stream()
                     .forEach(url -> this.urlQueue.add(url, document.getDepth() + 1));
         }

@@ -2,8 +2,6 @@ package index;
 
 import index.startegies.DocumentAnalyzingStartegy;
 
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
