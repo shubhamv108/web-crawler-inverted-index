@@ -27,6 +27,6 @@ public class IndexReposne {
     public boolean after(IndexReposne reposne) {
         return this.docId == reposne.docId
                 && this.row == reposne.row
-                && this.pos > reposne.pos;
+                && this.pos == reposne.pos + 1;
     }
 }
