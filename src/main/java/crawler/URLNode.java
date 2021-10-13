@@ -4,12 +4,16 @@ import java.net.URL;
 
 public class URLNode {
 
-    final URL url;
+    final String url;
     final int depth;
 
 
-    public URLNode(URL url, int depth) {
+    public URLNode(String url, int depth) {
         this.url = url;
         this.depth = depth;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

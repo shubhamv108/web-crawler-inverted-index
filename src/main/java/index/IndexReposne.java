@@ -23,4 +23,10 @@ public class IndexReposne {
     public Integer getRow() {
         return row;
     }
+
+    public boolean after(IndexReposne reposne) {
+        return this.docId == reposne.docId
+                && this.row == reposne.row
+                && this.pos < reposne.pos;
+    }
 }

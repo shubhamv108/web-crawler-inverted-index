@@ -2,6 +2,7 @@ package index;
 
 import index.startegies.DocumentAnalyzingStartegy;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Map;
 import java.util.Set;
@@ -19,8 +20,8 @@ public class DocumentStore {
         this.documentAnalyzingStartegy = documentAnalyzingStartegy;
     }
 
-    public Document create(URL url, String content, int depth) {
-        String urlPath = url.getPath().toLowerCase();
+    public Document create(String url, String content, int depth) {
+        String urlPath = url.toLowerCase();
         if (existingURL.contains(urlPath))
             return null;
         Document document = null;
@@ -32,6 +33,10 @@ public class DocumentStore {
             this.existingURL.add(urlPath);
         }
         return document;
+    }
+
+    public String getUrl(Integer docId) {
+        return this.documents.get(docId).getUrl();
     }
 
 }

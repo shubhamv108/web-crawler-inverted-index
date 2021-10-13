@@ -10,11 +10,7 @@ public class URLQueue {
     private Queue<URLNode> urls = new LinkedBlockingQueue<>();
 
     public void add(String url, int depth) {
-        try {
-            this.urls.add(new URLNode(new URL(url), depth));
-        } catch (MalformedURLException e) {
-            System.out.println(String.format("Malformed URl: %s", url));
-        }
+        this.urls.add(new URLNode(url, depth));
     }
 
     public URLNode fetch() {

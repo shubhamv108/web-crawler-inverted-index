@@ -1,10 +1,12 @@
 package crawler;
 
-import index.Document;
 import index.DocumentStore;
 import utils.HttpClient;
 
-import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class URLFetcher {
 
@@ -16,10 +18,19 @@ public class URLFetcher {
         this.documentStore = documentStore;
     }
 
-    public void fetch() throws IOException {
-        URLNode node = this.queue.fetch();
-        String content = HttpClient.invoke(node.url);
-        this.documentStore.create(node.url, content, node.depth);
+    public void fetch() {
+        URLNode node = null;
+        try {
+            node = this.queue.fetch();
+            System.out.println("Processing url: " + node.getUrl());
+            String content = HttpClient.invoke(new URL(node.getUrl()));
+            Files.write(Paths.get("/home/shubham/git/rapyuto/output"), content.getBytes());
+            this.documentStore.create(node.getUrl(), content, node.depth);
+        } catch (Exception ex) {
+            System.out.println("Exception occured while processing url: " + node.getUrl());
+        } finally {
+            this.fetch();
+        }
     }
 
 }

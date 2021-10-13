@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class ScrapperStrategy {
 
-    private static final String URL_PATTERN = "(https|http)://[a-zA-Z0-9/~!@#$%&*()\\-_+={}:;|\\[\\]'<>\\?/]*";
+    private static final String URL_PATTERN = "(https|http)://[a-zA-Z0-9\\./~!@#$%&*()\\-_+={}:;|\\[\\]'<>\\?/]*";
 
     public List<String> getURLs(String content) {
         return PatternMatcher.match(content, URL_PATTERN)

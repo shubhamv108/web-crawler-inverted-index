@@ -7,13 +7,13 @@ import java.net.URL;
 public class Document {
 
     final int id;
-    final URL url;
+    final String url;
     final String content;
     final int depth;
     boolean isProcessed;
     final DocumentAnalyzingStartegy documentAnalyzingStartegy;
 
-    public Document(int id, URL url, String content, int depth,
+    public Document(int id, String url, String content, int depth,
                     DocumentAnalyzingStartegy documentAnalyzingStartegy) {
         this.id = id;
         this.url = url;
@@ -27,7 +27,7 @@ public class Document {
         return id;
     }
 
-    public URL getUrl() {
+    public String getUrl() {
         return url;
     }
 
